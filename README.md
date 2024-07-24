@@ -1,6 +1,6 @@
 # 关于项目
 
-此项目是Cyberry Potter Electromagic wand魔杖的基础工程
+此项目是Cyberry Potter Electromagic wand魔杖的基础工程![](D:\EECS\Project\Cyberry_Porter_Elctromagic_Wand\CyberryPotterBasicProject\CyberryPotter_ElectromagicWand_Basic_Project\CNN\SpellsCard\Spell_Card.jpg)
 
 已经实现的功能有：
 
