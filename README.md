@@ -2,7 +2,7 @@
 
 此项目是Cyberry Potter Electromagic wand魔杖的基础工程
 
-![](.\CNN\SpellsCard\Spell_Card.jpg)
+![1](.\CNN\SpellsCard\Spell_Card.jpg)
 
 已经实现的功能有：
 
