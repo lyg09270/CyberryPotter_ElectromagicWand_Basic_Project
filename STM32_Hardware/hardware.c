@@ -42,7 +42,7 @@ void Hardware_Init()
 //TIM4 Init******************************************************//          
         TIM_TimerBaseInitStruct.TIM_Prescaler = 3600 - 1;
 	TIM_TimerBaseInitStruct.TIM_CounterMode = TIM_CounterMode_Up;
-	TIM_TimerBaseInitStruct.TIM_Period = 2000 - 1;                   //10ms per interrupt
+	TIM_TimerBaseInitStruct.TIM_Period = 20 - 1;                   //1ms per interrupt
 	TIM_TimerBaseInitStruct.TIM_ClockDivision = TIM_CKD_DIV1;
 	TIM_TimeBaseInit(TIM4,&TIM_TimerBaseInitStruct);
         
@@ -112,8 +112,8 @@ void Hardware_Init()
 	
 	NVIC_InitStruct.NVIC_IRQChannel = EXTI9_5_IRQn;
         NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
-        NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 4;
-        NVIC_InitStruct.NVIC_IRQChannelSubPriority = 4;
+        NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 6;
+        NVIC_InitStruct.NVIC_IRQChannelSubPriority = 6;
         NVIC_Init(&NVIC_InitStruct);
 	
 	IMU_STOP();
@@ -126,4 +126,18 @@ int fputc( int ch, FILE *f )
         while((USART1->SR & (1 << 7) ) == 0);
         USART1->DR = ch;
 	return ch;
+}
+
+void EXTI_Stop(void)
+{
+	EXTI->IMR &= ~(EXTI_Line0);
+	EXTI->IMR &= ~(EXTI_Line4);
+	EXTI->IMR &= ~(EXTI_Line8);
+}
+
+void EXTI_Restore(void)
+{
+	EXTI->IMR |= EXTI_Line0;
+	EXTI->IMR |= EXTI_Line4;
+	EXTI->IMR |= EXTI_Line8;
 }

@@ -2,32 +2,56 @@
 
 Cyberry_Potter_Status_Typedef Cyberry_Potter_Status;
 
-uint16_t i = 0;
-uint16_t TIM4_Count;
+volatile uint16_t time_hold_count_ms = 0;
+volatile uint16_t time_release_count_ms = 0;
+volatile uint16_t i = 0;
 
 void System_Init(void)
 {
         Hardware_Init();
         Cyberry_Potter_Status.Button_Click_Count = 0;
-        Cyberry_Potter_Status.Button_Status = BUTTON_RELEASE;
-        Cyberry_Potter_Status.Button_Time_Count = BUTTON_IDLE;
+        Cyberry_Potter_Status.Button_Status = BUTTON_IDLE;
         Cyberry_Potter_Status.Serial_Status = Serial_Idle;
-
+	Cyberry_Potter_Status.IMU_Status = IMU_Idle;
+	Cyberry_Potter_Status.LED_Status = LED_ALWAYS_ON;
 	LED_ON;
+}
+
+void Cyberry_Potter_System_Status_Update(void)
+{
+	if(Cyberry_Potter_Status.Button_Status == BUTTON_HOLD_VERY_LONG){
+	      switch(Cyberry_Potter_Status.System_Mode){
+		      case SYSTEM_IDLE:
+				Cyberry_Potter_Status.System_Mode = SYSTEM_TRANSMIT;
+				Cyberry_Potter_Status.LED_Status = LED_10HZ;
+				printf("SYSTEM_TRANSMIT\n");
+				break;
+		      case SYSTEM_TRANSMIT:
+				Cyberry_Potter_Status.System_Mode = SYSTEM_RECORD;
+				Cyberry_Potter_Status.LED_Status = LED_5HZ;
+				printf("SYSTEM_RECORD\n");
+				break;
+		      case SYSTEM_RECORD:
+				Cyberry_Potter_Status.System_Mode = SYSTEM_IDLE;
+				Cyberry_Potter_Status.LED_Status = LED_IDLE;
+				printf("SYSTEM_IDLE\n");
+				break;
+	      }  
+	      LED_Blink();
+	}
+	else {
+	}
+	
 }
 
 //IMU read
 void EXTI9_5_IRQHandler()
 {
+	
 	if(EXTI_GetITStatus(EXTI_Line5)==SET){
 		IMU_Get_Data(i);
-//		if(i > 0)
-//			//IMU_Kalman_Filter(i);
-//			IMU_LP_Filter(i);
-//		else{
-//			IMU_Initialize_Data();
-//		}
 		i++;
+		printf("%d ",i);
 		if(i >= IMU_SEQUENCE_LENGTH_MAX){
 			Cyberry_Potter_Status.IMU_Status = IMU_Sampled;
 			i = 0;
@@ -37,82 +61,69 @@ void EXTI9_5_IRQHandler()
         }
 }
 
-//Functions About Button******************************************************//
-void Button_Status_Update(void)
-{
-	TIM4_Count++; 
-        //When the button is pressed
-        if(Cyberry_Potter_Status.Button_Status == BUTTON_HOLD){
-		//The threshold between short press and long press is BUTTON_LONG_SHORT_THRESHOLD_100ms
-		
-                if (TIM4_Count == BUTTON_LONG_SHORT_THRESHOLD_100ms){
-                        TIM4_Count = BUTTON_LONG_SHORT_THRESHOLD_100ms;
-			
-                        //BUTTON_SHORT_AND_LONG
-                        if(Cyberry_Potter_Status.Button_Click_Count >= 1){
-                                Cyberry_Potter_Status.Button_Time_Count = BUTTON_SHORT_AND_LONG;
-                        }
-                        //BUTTON_HOLD_LONG
-                        else{
-                                Cyberry_Potter_Status.Button_Time_Count = BUTTON_HOLD_LONG;
-                        }
-		}	
-		//Button Hold long time keep status
-		else if(TIM4_Count > BUTTON_LONG_SHORT_THRESHOLD_100ms){
-			TIM4_Count = BUTTON_LONG_SHORT_THRESHOLD_100ms + 1;
-		}
-                
-		//BUTTON_HOLD_SHORT
-                else{
-                        Cyberry_Potter_Status.Button_Time_Count = BUTTON_HOLD_SHORT;
-                }
-        }     
-	
-        //When the button is released
-        else{
-                //The threshold between idle and wait next long press is BUTTON_RELEASE_THRESHOLD_100ms  
-                if (TIM4_Count >= BUTTON_RELEASE_THRESHOLD_100ms){
-                        Cyberry_Potter_Status.Button_Time_Count = BUTTON_IDLE;
-			Cyberry_Potter_Status.Button_Status = BUTTON_RELEASE;
-                        Cyberry_Potter_Status.Button_Click_Count = 0;
-                        TIM4_Count = 0;
-                        TIMER_FOR_BUTTON_DISABLE;
-                }
-		//BUTTON_RELEASE_SHORT 
-                else{
-                        Cyberry_Potter_Status.Button_Time_Count = BUTTON_RELEASE_SHORT;
-                        Cyberry_Potter_Status.Button_Click_Count = 1;
-                }   
-        }
-}
-
-
 //Button EXTI handler*******************************************************//
 void EXTI0_IRQHandler(void)
 {
-	Delay_ms(10);
         if(EXTI_GetITStatus(EXTI_Line0)==SET){
-		TIM4_Count = 0;
-		//Button is pressed
-                if(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0) == RESET){
-                        Cyberry_Potter_Status.Button_Status = BUTTON_HOLD;
-                        TIMER_FOR_BUTTON_ENABLE;
-                }
-		//Button is relessed
-                else{
-                        Cyberry_Potter_Status.Button_Status = BUTTON_RELEASE;
-                }
-                
+		//If previous button status is handled.Then button status must change to IDLE.
+		if(Cyberry_Potter_Status.Button_Status == BUTTON_IDLE){
+			printf("in");
+			TIMER_FOR_BUTTON_ENABLE;
+		}
+		else{}//Else do nothing
                 EXTI_ClearITPendingBit(EXTI_Line0);
         }
-	Delay_ms(10);
 }
 
 //Button status update for a given time
 void TIM4_IRQHandler(void)
 {
+	static uint8_t previous_stuatus = 1;
         if(TIM_GetITStatus(TIM4,TIM_IT_Update) == SET){
-               Button_Status_Update();
+		//Read Button status on GPIO for now
+		uint8_t current_status = GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0);
+		
+		//If status for now and previous is same,and button is held
+		if(previous_stuatus == current_status && current_status == 0){
+			
+			time_hold_count_ms++;
+			//If button status is stable for BUTTON_LONG_VERYLONG_THRESHOLD_MS
+			if(time_hold_count_ms >= BUTTON_LONG_VERYLONG_THRESHOLD_MS){
+					Cyberry_Potter_Status.Button_Status = BUTTON_HOLD_VERY_LONG;
+					Cyberry_Potter_System_Status_Update();
+					Cyberry_Potter_Status.Button_Status = BUTTON_IDLE;
+					time_release_count_ms = 0;
+					TIMER_FOR_BUTTON_DISABLE;
+				}
+		}
+		//If status for now and previous is same,and button is released
+		else if(previous_stuatus == current_status && current_status == 1){
+			time_release_count_ms++;
+			//If button status is stable for BUTTON_IDLE_SHORT_THRESHOLD_MS 
+			if(time_release_count_ms >= BUTTON_IDLE_SHORT_THRESHOLD_MS){
+				
+				//If button status is stable for BUTTON_SHORT_LONG_THRESHOLD_MS
+				if(time_hold_count_ms >= BUTTON_SHORT_LONG_THRESHOLD_MS){
+					Cyberry_Potter_Status.Button_Status = BUTTON_HOLD_LONG;
+					printf("long ");
+				}
+				//If button status is stable for BUTTON_IDLE_SHORT_THRESHOLD_MS 
+				else if(time_hold_count_ms >= BUTTON_IDLE_SHORT_THRESHOLD_MS){
+					Cyberry_Potter_Status.Button_Status = BUTTON_HOLD;
+					printf("hold ");
+				}
+				printf("hold:%d",time_hold_count_ms);
+				time_hold_count_ms = 0;
+				time_release_count_ms = 0;
+				TIMER_FOR_BUTTON_DISABLE;
+			}
+			else{}	//Else do nothing.
+		}
+		//If status for now and previous is NOT same.
+		else{}
+			
+		//Status update 
+		previous_stuatus = current_status;
 		TIM_ClearITPendingBit(TIM4,TIM_IT_Update);
 	}
 }
@@ -120,43 +131,35 @@ void TIM4_IRQHandler(void)
 
 void LED_Blink(void)
 {
-        while(1){
-                LED_ON;
-		Delay_ms(500);
-                LED_OFF;    
-		Delay_ms(500);		
+	int i = 0;
+        if(Cyberry_Potter_Status.LED_Status == LED_5HZ){
+		for(i = 0; i < 6; i++){
+                LED_OFF;
+		Delay_ms(100);
+                LED_ON;    
+		Delay_ms(100);		
+		}
+		Cyberry_Potter_Status.LED_Status = LED_ALWAYS_ON;
         }
-}
-
-
-
-void Cyberry_Potter_System_Status_Update(void)
-{
-	if(Cyberry_Potter_Status.Button_Time_Count == BUTTON_SHORT_AND_LONG){
-	      switch(Cyberry_Potter_Status.System_Mode){
-		      case SYSTEM_IDLE:
-				Cyberry_Potter_Status.System_Mode = SYSTEM_TRANSMIT;
-				printf("SYSTEM_TRANSMIT\n");
-				break;
-		      case SYSTEM_TRANSMIT:
-				Cyberry_Potter_Status.System_Mode = SYSTEM_RECORD;
-				printf("SYSTEM_RECORD\n");
-				break;
-		      case SYSTEM_RECORD:
-				Cyberry_Potter_Status.System_Mode = SYSTEM_IDLE;
-				printf("SYSTEM_IDLE\n");
-				break;
-	      }
+	else if(Cyberry_Potter_Status.LED_Status == LED_10HZ){
+		for(i = 0; i < 11; i++){
+                LED_OFF;
+		Delay_ms(50);
+                LED_ON;    
+		Delay_ms(50);		
+		}
+		Cyberry_Potter_Status.LED_Status = LED_ALWAYS_ON;
+        }
+	else if (Cyberry_Potter_Status.LED_Status == LED_ALWAYS_ON){
+		LED_ON;
 	}
-	else {
-		
+	else{
+		LED_ON;
+		Delay_ms(200);
+		LED_OFF;
+		Delay_ms(500);
+		LED_ON;
+		Delay_ms(300);
+		Cyberry_Potter_Status.LED_Status = LED_ALWAYS_ON;
 	}
-	Cyberry_Potter_Status.Button_Time_Count = BUTTON_IDLE;
-}
-
-//Main cycle**********************************************************************//
-void Cyberry_Potter(void)
-{
-	
-	
 }

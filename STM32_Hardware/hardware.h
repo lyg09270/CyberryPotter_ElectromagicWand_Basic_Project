@@ -15,6 +15,8 @@
 #define LED_OFF GPIO_WriteBit(GPIOA,GPIO_Pin_7,Bit_RESET)
 
 void Hardware_Init(void);
+void EXTI_Stop(void);
+void EXTI_Restore(void);
 
 #endif	//_HARDWARE_H_
 

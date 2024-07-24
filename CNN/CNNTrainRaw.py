@@ -1,47 +1,55 @@
 import os
-import numpy as np
-import tensorflow as tf
-import tensorflow as tf
+import numpy as np # type: ignore
+import tensorflow as tf # type: ignore
 from tensorflow.keras.models import load_model, save_model # type: ignore
 from tensorflow.keras.preprocessing.sequence import pad_sequences # type: ignore
 from tensorflow.keras import * # type: ignore
 from tensorflow.keras.layers import * # type: ignore
-from nnom import *
+from nnom import * # type: ignore
+import matplotlib.pyplot as plt # type: ignore
 import re
 
 # 动作分类名
-motion_names = ['RightAngle', 'SharpAngle', 'Lightning', 'Triangle', 'Letter_h', 'letter_R',
-                'letter_W', 'letter_phi', 'Circle', 'UpAndDown', 'Horn', 'Wave']
+motion_names = ['RightAngle','SharpAngle','Lightning','Triangle','Letter_h','letter_R','letter_W','letter_phi','Circle','UpAndDown','Horn','Wave','NoMotion']
 
 # 定义目录路径
 DEF_SAVE_TO_PATH = './TraningData_7_23/'
 DEF_MODEL_NAME = 'model.h5'
 DEF_MODEL_H_NAME = 'weights.h'
-DEF_FILE_MAX = 9
+DEF_FILE_MAX = 100
+DEF_N_ROWS = 60
 
 # 文件格式
 DEF_FILE_FORMAT = '.txt'
 # 文件名分隔符
 DEF_FILE_NAME_SEPERATOR = '_'
-DEF_BATCH_SIZE = 50
-DEF_NUM_EPOCH = 80
+DEF_BATCH_SIZE = 80
+DEF_NUM_EPOCH = 160
+
+# 检查TensorFlow是否识别到了GPU
+print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 
 # 动作名称到标签的映射
 motion_to_label = {name: idx for idx, name in enumerate(motion_names)}
 
-def train(x_train, x_test,input_shape=(80, 3), num_classes=len(motion_names),batch_size= DEF_BATCH_SIZE, epochs = DEF_NUM_EPOCH):
+def train(x_train, x_test,input_shape=(DEF_N_ROWS, 3), num_classes=len(motion_names),batch_size= DEF_BATCH_SIZE, epochs = DEF_NUM_EPOCH):
     inputs = Input(shape=input_shape) # type: ignore
     # 卷积层1
     x = Conv1D(24, kernel_size=3,strides=1)(inputs)  # type: ignore # 减少滤波器数量
-    x = ReLU()(x) # type: ignore
-    x = Conv1D(12, kernel_size=3,strides=1)(inputs)  # type: ignore # 减少滤波器数量
-    x = ReLU()(x) # type: ignore
-    # 最大池化层1
+    x = ReLU()(x)  # type: ignore 
+    x = Conv1D(12, kernel_size=3,strides=1)(x)  # type: ignore # 减少滤波器数量
+    x = ReLU()(x)  # type: ignore
+    x = Conv1D(12, kernel_size=3,strides=1)(x)  # type: ignore # 减少滤波器数量
+    x = ReLU()(x)  # type: ignore
+    x = Conv1D(12, kernel_size=3,strides=1)(x)  # type: ignore # 减少滤波器数量
+    x = ReLU()(x)  # type: ignore
     x = MaxPooling1D(pool_size=3, strides=1)(x) # type: ignore
     # 展平层
     x = Flatten()(x) # type: ignore
+    x = Dropout(0.5)(x) # type: ignore
     # 全连接层1
     x = Dense(num_classes)(x) # type: ignore
+    x = Dropout(0.5)(x)  # type: ignore # 添加Dropout层
     outputs = Softmax()(x) # type: ignore
     
     model = Model(inputs=inputs, outputs=outputs) # type: ignore
@@ -68,7 +76,7 @@ def train(x_train, x_test,input_shape=(80, 3), num_classes=len(motion_names),bat
 
 
 # 加载数据集
-def load_dataset(root_dir):
+def load_dataset(root_dir, nrows=None):
     file_list = []
     labels = []
     for filename in os.listdir(root_dir):
@@ -81,7 +89,8 @@ def load_dataset(root_dir):
                 if 0 <= number <= DEF_FILE_MAX:
                     if motion_name in motion_to_label:
                         file_path = os.path.join(root_dir, filename)
-                        data = np.loadtxt(file_path, delimiter=' ', usecols=(0, 1, 2))
+                        # 使用nrows参数限制读取的行数
+                        data = np.loadtxt(file_path, delimiter=' ', usecols=(0, 1, 2), max_rows=nrows)
                         file_list.append(data)
                         labels.append(motion_to_label[motion_name])
                     else:
@@ -92,7 +101,7 @@ def load_dataset(root_dir):
                 print(f"Invalid file name format: {filename}")
     return file_list, labels
 
-file_list, labels = load_dataset(DEF_SAVE_TO_PATH)
+file_list, labels = load_dataset(DEF_SAVE_TO_PATH,DEF_N_ROWS)
 
 # 数据预处理，例如填充序列以达到统一长度
 max_len = max([len(x) for x in file_list])  # 找到最长序列的长度
@@ -128,10 +137,6 @@ history = train(train_dataset,test_dataset, batch_size=DEF_BATCH_SIZE, epochs=DE
 #加载模型
 model = load_model(DEF_MODEL_NAME)
 
-# 开始测试
-test_loss, test_accuracy = model.evaluate(test_dataset)
-
-
 model.compile(optimizer='adam',
             loss='CategoricalCrossentropy',
             metrics=['accuracy'])
@@ -139,12 +144,9 @@ model.compile(optimizer='adam',
 model.summary()
 
 # 从训练数据集中获取一个批次作为校准数据集
-x_train, _ = next(iter(train_dataset))
-x_test, _ = next(iter(train_dataset))
+x_test, _ = next(iter(test_dataset))
 # 将EagerTensor转换为NumPy数组
-x_train = x_train.numpy()
 x_test = x_test.numpy()
 
-print(f'\nTest accuracy: {test_accuracy * 100} %')
 # (NNoM utils) Automatically deploying, use 100 pices for output range
-generate_model(model, x_train, format='hwc', name=DEF_MODEL_H_NAME)
+generate_model(model, x_test, format='hwc', name=DEF_MODEL_H_NAME) # type: ignore

@@ -1,13 +1,14 @@
-import serial
-import serial.tools.list_ports
-import numpy as np
-import tensorflow as tf
+import serial # type: ignore
+import serial.tools.list_ports # type: ignore
+import numpy as np # type: ignore
+import tensorflow as tf # type: ignore
 from tensorflow.keras.models import load_model # type: ignore
 DEF_TITLE_STRING = 'IMU\n'
 DEF_MODEL_NAME = 'model.h5'
 DEF_BAUD_RATE = 921600
+DEF_N_ROWS = 60
 
-motion_name = ['RightAngle','SharpAngle','Lightning','Triangle','Letter_h','letter_R','letter_W','letter_phi','Circle','UpAndDown','Horn','Wave']
+motion_name = ['RightAngle','SharpAngle','Lightning','Triangle','Letter_h','letter_R','letter_W','letter_phi','Circle','UpAndDown','Horn','Wave','NoMotion']
 
 port_list = list(serial.tools.list_ports.comports())
 
@@ -101,7 +102,7 @@ def predict_motion(inputs_array):
             index = i
     
     print(temp)
-    if temp >= 0.15:
+    if temp >= 0.90:
         return motion_name[index]
     else:
         return "Unrecognized"
