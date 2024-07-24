@@ -1,1 +1,1 @@
-{'input_1': [5, 0], 'conv1d_1': [5, 0], 're_lu_1': [5, 0], 'max_pooling1d': [5, 0], 'flatten': [5, 0], 'dense': [3, 0], 'softmax': [7, 0]}
+{'input_1': [5, 0], 'conv1d': [5, 0], 're_lu': [5, 0], 'conv1d_1': [4, 0], 're_lu_1': [4, 0], 'conv1d_2': [3, 0], 're_lu_2': [3, 0], 'conv1d_3': [3, 0], 're_lu_3': [3, 0], 'max_pooling1d': [3, 0], 'flatten': [3, 0], 'dropout': [3, 0], 'dense': [1, 0], 'dropout_1': [1, 0], 'softmax': [7, 0]}

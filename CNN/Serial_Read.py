@@ -1,5 +1,5 @@
-import serial
-import serial.tools.list_ports
+import serial # type: ignore
+import serial.tools.list_ports # type: ignore
 import os
 import time
 import re
@@ -15,7 +15,7 @@ DEF_FILE_FORMAT = '.txt'
 DEF_TITLE_STRING = 'IMU\n'
 DEF_BAUD_RATE = 921600
 
-motion_name = ['RightAngle','SharpAngle','Lightning','Triangle','Letter_h','letter_R','letter_W','letter_phi','Circle','UpAndDown','Horn','Wave']
+motion_name = ['RightAngle','SharpAngle','Lightning','Triangle','Letter_h','letter_R','letter_W','letter_phi','Circle','UpAndDown','Horn','Wave','NoMotion']
 port_list = list(serial.tools.list_ports.comports())
 
 #显示所有可用串口
@@ -78,11 +78,11 @@ def Motion_Assign():
     i = 0
     user_input = 0
     print('\nChoose one from the fllowing name')
-    for i in range(0,12,1):
+    for i in range(0,13,1):
         print(i+1,motion_name[i])
-    while user_input > 12 or user_input < 1:
-        user_input = int(input("Assign a motion you want to decord (1-12)"))
-        if user_input > 12 or user_input < 1:
+    while user_input > 13 or user_input < 1:
+        user_input = int(input("Assign a motion you want to decord (1-13)"))
+        if user_input > 13 or user_input < 1:
             print("Invalid Input.Check and try again")
         else:
                 return user_input - 1            

@@ -18,17 +18,13 @@ typedef enum eSystem_Mode{
 }eSystem_Mode;
 
 typedef enum eButton_Status{
-        BUTTON_RELEASE = 0,
-        BUTTON_HOLD = 1
+	BUTTON_IDLE = 0,
+        BUTTON_RELEASE = 1,
+        BUTTON_HOLD = 2,
+	BUTTON_HOLD_LONG = 3,
+	BUTTON_HOLD_VERY_LONG = 4
+	
 }eButton_Status;     
-
-typedef enum eButton_Time_Count{
-        BUTTON_IDLE = 0,
-        BUTTON_HOLD_SHORT = 1,
-        BUTTON_HOLD_LONG = 2,
-        BUTTON_RELEASE_SHORT = 3,
-        BUTTON_SHORT_AND_LONG = 4
-}eButton_Time_Count;    
 
 typedef enum eIMU_STATUS{
         IMU_Idle = 0,
@@ -36,6 +32,13 @@ typedef enum eIMU_STATUS{
         IMU_Sampled = 2,
 	IMU_Sample = 3
 }eIMU_STATUS;
+
+typedef enum eLED_LED{
+        LED_IDLE = 0,
+        LED_5HZ = 1,
+        LED_10HZ = 2,
+	LED_ALWAYS_ON = 3
+}eLED_STATUS;
 
 typedef enum eSerial_Status{
         Serial_Idle = 0,
@@ -46,14 +49,16 @@ typedef enum eSerial_Status{
 typedef struct Cyberry_Potter_Status_Typedef{
         eSystem_Mode System_Mode;
         eButton_Status Button_Status;
-        eButton_Time_Count Button_Time_Count;
+        uint8_t Button_Press_Count;
         uint8_t Button_Click_Count;
         eIMU_STATUS IMU_Status;
+	eLED_STATUS LED_Status;
         eSerial_Status Serial_Status;
 }Cyberry_Potter_Status_Typedef;
 
 void Cyberry_Potter_System_Status_Update(void);
 void System_Init(void);
 void Cyberry_Potter(void);
+void LED_Blink(void);
 
 #endif	//_CYBERRY_POTTER_H_
