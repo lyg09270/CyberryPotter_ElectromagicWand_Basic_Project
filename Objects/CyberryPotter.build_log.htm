@@ -1,0 +1,260 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.40.0.0
+Copyright (C) 2024 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Victor Lee, 123, LIC=8VRJ7-ECYHM-MM19I-TTRKH-L62JL-Y2QCG
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.40.0.3
+Toolchain Path:  D:\Program Files\Keil\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.22
+Assembler:       Armasm.exe V6.22
+Linker/Locator:  ArmLink.exe V6.22
+Library Manager: ArmAr.exe V6.22
+Hex Converter:   FromElf.exe V6.22
+CPU DLL:         SARMCM3.DLL V5.40.0.3
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      UL2CM3.DLL V1.164.11.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+D:\EECS\Project\Cyberry_Porter_Elctromagic_Wand\CyberryPotterBasicProject\CyberryPotter_ElectromagicWand_Basic_Project\CyberryPotter.uvprojx
+Project File Date:  07/25/2024
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.22', folder: 'D:\Program Files\Keil\ARM\ARMCLANG\Bin'
+Build target 'Target 1'
+compiling Delay.c...
+compiling CyberryPotter.c...
+compiling nnom_layers.c...
+compiling MPU6050.c...
+compiling IMU.c...
+compiling hardware.c...
+compiling nnom_tensor.c...
+compiling IIC.c...
+compiling inv_mpu_dmp_motion_driver.c...
+compiling main.c...
+compiling nnom_activation.c...
+compiling nnom_utils.c...
+compiling nnom.c...
+compiling nnom_baselayer.c...
+compiling nnom_avgpool.c...
+compiling nnom_conv2d.c...
+compiling nnom_cropping.c...
+compiling nnom_concat.c...
+compiling nnom_conv2d_trans.c...
+compiling nnom_dense.c...
+compiling nnom_dw_conv2d.c...
+compiling nnom_flatten.c...
+compiling nnom_global_pool.c...
+compiling inv_mpu.c...
+compiling nnom_lambda.c...
+compiling nnom_gru_cell.c...
+compiling nnom_input.c...
+compiling nnom_local_q15.c...
+compiling nnom_output.c...
+compiling nnom_reshape.c...
+compiling nnom_local.c...
+compiling nnom_lstm_cell.c...
+compiling nnom_maxpool.c...
+compiling nnom_simple_cell.c...
+compiling nnom_matrix.c...
+compiling nnom_rnn.c...
+compiling nnom_upsample.c...
+compiling nnom_sumpool.c...
+compiling nnom_softmax.c...
+compiling nnom_zero_padding.c...
+compiling retarget_io.c...
+compiling misc.c...
+compiling stm32f10x_bkp.c...
+compiling stm32f10x_exti.c...
+compiling stm32f10x_crc.c...
+compiling stm32f10x_cec.c...
+compiling stm32f10x_dbgmcu.c...
+compiling stm32f10x_adc.c...
+compiling stm32f10x_dac.c...
+compiling stm32f10x_dma.c...
+compiling stm32f10x_can.c...
+compiling stm32f10x_iwdg.c...
+compiling stm32f10x_fsmc.c...
+compiling stm32f10x_gpio.c...
+compiling stm32f10x_pwr.c...
+compiling stm32f10x_i2c.c...
+compiling stm32f10x_flash.c...
+compiling stm32f10x_rtc.c...
+compiling stm32f10x_wwdg.c...
+compiling stm32f10x_sdio.c...
+compiling stm32f10x_spi.c...
+compiling stm32f10x_rcc.c...
+compiling system_stm32f10x.c...
+compiling stm32f10x_usart.c...
+assembling startup_stm32f10x_md.s...
+compiling stm32f10x_tim.c...
+linking...
+Program Size: Code=26752 RO-data=15584 RW-data=52 ZI-data=11068  
+".\Objects\CyberryPotter.axf" - 0 Error(s), 0 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                https://www.keil.com/pack/ARM.CMSIS.6.0.0.pack
+                ARM::CMSIS@6.0.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 6.0.0
+
+Package Vendor: ARM
+                https://www.keil.com/pack/ARM.CMSIS-Compiler.2.1.0.pack
+                ARM::CMSIS-Compiler@2.1.0
+                CMSIS Compiler extensions for Arm Compiler, GCC, Clang, and IAR Compiler
+   * Component: CORE Version: 1.1.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.1.pack
+                Keil::STM32F1xx_DFP@2.4.1
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+   * Component: Startup Version: 1.0.0
+   * Component: ADC Version: 3.6.0
+   * Component: BKP Version: 3.6.0
+   * Component: CAN Version: 3.6.0
+   * Component: CEC Version: 3.6.0
+   * Component: CRC Version: 3.6.0
+   * Component: DAC Version: 3.6.0
+   * Component: DBGMCU Version: 3.6.0
+   * Component: DMA Version: 3.6.0
+   * Component: EXTI Version: 3.6.0
+   * Component: FSMC Version: 3.6.0
+   * Component: Flash Version: 3.6.0
+   * Component: Framework Version: 3.6.0
+   * Component: GPIO Version: 3.6.0
+   * Component: I2C Version: 3.6.0
+   * Component: IWDG Version: 3.6.0
+   * Component: PWR Version: 3.6.0
+   * Component: RCC Version: 3.6.0
+   * Component: RTC Version: 3.6.0
+   * Component: SDIO Version: 3.6.0
+   * Component: SPI Version: 3.6.0
+   * Component: TIM Version: 3.6.0
+   * Component: USART Version: 3.6.0
+   * Component: WWDG Version: 3.6.0
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/Device/STM32F103C8
+  ./RTE/_Target_1
+  C:/Users/13087/AppData/Local/Arm/Packs/ARM/CMSIS/6.0.0/CMSIS/Core/Include
+  C:/Users/13087/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include
+  C:/Users/13087/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/StdPeriph_Driver/inc
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS-Compiler:CORE@1.1.0
+      Source file:   source/armcc/retarget_io.c
+
+   * Component: ARM::CMSIS:CORE@6.0.0
+
+   * Component: Keil::Device:Startup@1.0.0
+      Source file:   Device/Source/ARM/startup_stm32f10x_md.s
+      Source file:   Device/Source/system_stm32f10x.c
+      Include file:  RTE_Driver/Config/RTE_Device.h
+      Source file:   Device/Source/ARM/STM32F1xx_OPT.s
+
+   * Component: Keil::Device:StdPeriph Drivers:ADC@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_adc.h
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_adc.c
+
+   * Component: Keil::Device:StdPeriph Drivers:BKP@3.6.0
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_bkp.c
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_bkp.h
+
+   * Component: Keil::Device:StdPeriph Drivers:CAN@3.6.0
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_can.c
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_can.h
+
+   * Component: Keil::Device:StdPeriph Drivers:CEC@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_cec.h
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_cec.c
+
+   * Component: Keil::Device:StdPeriph Drivers:CRC@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_crc.h
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_crc.c
+
+   * Component: Keil::Device:StdPeriph Drivers:DAC@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_dac.h
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_dac.c
+
+   * Component: Keil::Device:StdPeriph Drivers:DBGMCU@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_dbgmcu.h
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_dbgmcu.c
+
+   * Component: Keil::Device:StdPeriph Drivers:DMA@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_dma.h
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_dma.c
+
+   * Component: Keil::Device:StdPeriph Drivers:EXTI@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_exti.h
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_exti.c
+
+   * Component: Keil::Device:StdPeriph Drivers:FSMC@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_fsmc.h
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_fsmc.c
+
+   * Component: Keil::Device:StdPeriph Drivers:Flash@3.6.0
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_flash.c
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_flash.h
+
+   * Component: Keil::Device:StdPeriph Drivers:Framework@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/misc.h
+      Source file:   Device/StdPeriph_Driver/templates/stm32f10x_it.c
+      Source file:   Device/StdPeriph_Driver/src/misc.c
+      Include file:  Device/StdPeriph_Driver/templates/stm32f10x_it.h
+      Source file:   Device/StdPeriph_Driver/templates/stm32f10x_conf.h
+
+   * Component: Keil::Device:StdPeriph Drivers:GPIO@3.6.0
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_gpio.c
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_gpio.h
+
+   * Component: Keil::Device:StdPeriph Drivers:I2C@3.6.0
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_i2c.c
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_i2c.h
+
+   * Component: Keil::Device:StdPeriph Drivers:IWDG@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_iwdg.h
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_iwdg.c
+
+   * Component: Keil::Device:StdPeriph Drivers:PWR@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_pwr.h
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_pwr.c
+
+   * Component: Keil::Device:StdPeriph Drivers:RCC@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_rcc.h
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_rcc.c
+
+   * Component: Keil::Device:StdPeriph Drivers:RTC@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_rtc.h
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_rtc.c
+
+   * Component: Keil::Device:StdPeriph Drivers:SDIO@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_sdio.h
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_sdio.c
+
+   * Component: Keil::Device:StdPeriph Drivers:SPI@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_spi.h
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_spi.c
+
+   * Component: Keil::Device:StdPeriph Drivers:TIM@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_tim.h
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_tim.c
+
+   * Component: Keil::Device:StdPeriph Drivers:USART@3.6.0
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_usart.h
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_usart.c
+
+   * Component: Keil::Device:StdPeriph Drivers:WWDG@3.6.0
+      Source file:   Device/StdPeriph_Driver/src/stm32f10x_wwdg.c
+      Include file:  Device/StdPeriph_Driver/inc/stm32f10x_wwdg.h
+Build Time Elapsed:  00:00:13
+</pre>
+</body>
+</html>

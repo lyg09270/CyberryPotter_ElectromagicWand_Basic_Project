@@ -51,12 +51,10 @@ void EXTI9_5_IRQHandler()
 	if(EXTI_GetITStatus(EXTI_Line5)==SET){
 		IMU_Get_Data(i);
 		i++;
-		printf("%d ",i);
 		if(i >= IMU_SEQUENCE_LENGTH_MAX){
 			Cyberry_Potter_Status.IMU_Status = IMU_Sampled;
 			i = 0;
 			IMU_STOP();
-			printf("Samlpled");
 		}	
 	EXTI_ClearITPendingBit(EXTI_Line5);	
         }

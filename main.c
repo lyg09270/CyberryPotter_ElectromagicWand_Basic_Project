@@ -162,17 +162,19 @@ int  main(void)
 		}
 
 		if(Cyberry_Potter_Status.IMU_Status == IMU_Sampled){
-			printf("IMU_Sampled");
 			LED_ON;
 			#ifdef SYSTEM_MODE_DATA_COLLECT
 			Delay_ms(200);
 			IMU_Data_Print();
 			#endif //SYSTEM_MODE_DATA_COLLECT
+			
+			#ifndef SYSTEM_MODE_DATA_COLLECT
 			model_feed_data();
 			model_run(model);
 			model_output = model_get_output();
 			printf("%d",model_output);
 			Model_LED(model_output);
+			#endif //SYSTEM_MODE_DATA_COLLECT
 			Cyberry_Potter_Status.IMU_Status = IMU_Idle;
 			EXTI_Restore();
 		}

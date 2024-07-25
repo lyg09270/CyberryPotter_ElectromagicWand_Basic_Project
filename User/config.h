@@ -28,8 +28,8 @@
 
 // Define Serial baud rate
 // #define BAUD_RATE 9600
-#define BAUD_RATE (115200)
-//#define BAUD_RATE (921600)
+//#define BAUD_RATE (115200)
+#define BAUD_RATE (921600)
 
 //Define TIM4
 #define TIM4_PER_INTERRUPT_MS (1)
