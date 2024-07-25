@@ -23,7 +23,7 @@ extern Cyberry_Potter_Status_Typedef Cyberry_Potter_Status;
 //measured data beginning with m, d means derivative ,mdAngle is measured angular velovity in this case.
 float IMU_Data_mAcc[IMU_SEQUENCE_LENGTH_MAX][3];
 float IMU_Data_mdAngle[IMU_SEQUENCE_LENGTH_MAX][3];
-int16_t IMU_bias[6] = {0,0,1228,-30,32,40};
+int16_t IMU_bias[6] = {0,0,0,0,0,0};
 
 
 //This function is used to print the Acc data to your computer
@@ -49,6 +49,7 @@ void IMU_Sample_Start(void)
 	Cyberry_Potter_Status.IMU_Status = IMU_Sampling;
 }
 
+#ifndef IMU_OFFSET_TEST
 void IMU_Get_Data(uint8_t i)
 {
 	uint8_t temp[6];
@@ -71,3 +72,20 @@ void IMU_Get_Data(uint8_t i)
 	IMU_Data_mdAngle[i][Pitch] = IMU_Received[Pitch] / IMU_GYRO_TRANS_RADIAN_CONSTANT;
 	IMU_Data_mdAngle[i][Yaw] = IMU_Received[Yaw] / IMU_GYRO_TRANS_RADIAN_CONSTANT;
 }
+
+#endif //IMU_OFFSET_TEST
+
+#ifdef IMU_OFFSET_TEST
+void IMU_Get_Data(uint8_t i)
+{
+	uint8_t temp[6];
+	int16_t IMU_Received[3];
+	IIC_read(0x68,MPU6050_RA_ACCEL_XOUT_H,6,temp);
+	IMU_Received[AccX] = (temp[0] << 8) + temp[1] - IMU_bias[AccX];
+	IMU_Received[AccY] = (temp[2] << 8) + temp[3] - IMU_bias[AccY];
+	IMU_Received[AccZ] = (temp[4] << 8) + temp[5] - IMU_bias[AccZ];
+	
+	printf("AccX:%d AccY:%d AccZ:%d\n",
+		IMU_Received[AccX],IMU_Received[AccY],IMU_Received[AccZ]);
+}
+#endif //IMU_OFFSET_TEST

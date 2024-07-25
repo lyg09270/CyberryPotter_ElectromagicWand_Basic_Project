@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt # type: ignore
 import re
 
 # 动作分类名
-motion_names = ['RightAngle','SharpAngle','Lightning','Triangle','Letter_h','letter_R','letter_W','letter_phi','Circle','UpAndDown','Horn','Wave','NoMotion']
+motion_names = ['RightAngle','SharpAngle','Lightning','Triangle','Letter_h','letter_R','letter_W',' ','Circle','UpAndDown','Horn','Wave','NoMotion']
 
 # 定义目录路径
 DEF_SAVE_TO_PATH = './TraningData_7_23/'
@@ -24,10 +24,7 @@ DEF_FILE_FORMAT = '.txt'
 # 文件名分隔符
 DEF_FILE_NAME_SEPERATOR = '_'
 DEF_BATCH_SIZE = 80
-DEF_NUM_EPOCH = 160
-
-# 检查TensorFlow是否识别到了GPU
-print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
+DEF_NUM_EPOCH = 200
 
 # 动作名称到标签的映射
 motion_to_label = {name: idx for idx, name in enumerate(motion_names)}

@@ -14,6 +14,7 @@ void System_Init(void)
         Cyberry_Potter_Status.Serial_Status = Serial_Idle;
 	Cyberry_Potter_Status.IMU_Status = IMU_Idle;
 	Cyberry_Potter_Status.LED_Status = LED_ALWAYS_ON;
+	Cyberry_Potter_Status.System_Mode = SYSTEM_TRANSMIT;
 	LED_ON;
 }
 
@@ -47,7 +48,6 @@ void Cyberry_Potter_System_Status_Update(void)
 //IMU read
 void EXTI9_5_IRQHandler()
 {
-	
 	if(EXTI_GetITStatus(EXTI_Line5)==SET){
 		IMU_Get_Data(i);
 		i++;
@@ -56,6 +56,7 @@ void EXTI9_5_IRQHandler()
 			Cyberry_Potter_Status.IMU_Status = IMU_Sampled;
 			i = 0;
 			IMU_STOP();
+			printf("Samlpled");
 		}	
 	EXTI_ClearITPendingBit(EXTI_Line5);	
         }
@@ -67,7 +68,6 @@ void EXTI0_IRQHandler(void)
         if(EXTI_GetITStatus(EXTI_Line0)==SET){
 		//If previous button status is handled.Then button status must change to IDLE.
 		if(Cyberry_Potter_Status.Button_Status == BUTTON_IDLE){
-			printf("in");
 			TIMER_FOR_BUTTON_ENABLE;
 		}
 		else{}//Else do nothing
@@ -90,7 +90,7 @@ void TIM4_IRQHandler(void)
 			//If button status is stable for BUTTON_LONG_VERYLONG_THRESHOLD_MS
 			if(time_hold_count_ms >= BUTTON_LONG_VERYLONG_THRESHOLD_MS){
 					Cyberry_Potter_Status.Button_Status = BUTTON_HOLD_VERY_LONG;
-					Cyberry_Potter_System_Status_Update();
+					//Cyberry_Potter_System_Status_Update();
 					Cyberry_Potter_Status.Button_Status = BUTTON_IDLE;
 					time_release_count_ms = 0;
 					TIMER_FOR_BUTTON_DISABLE;

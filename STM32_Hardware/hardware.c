@@ -90,7 +90,7 @@ void Hardware_Init()
         printf("Hello!\n");
 //LED init*****************************************//      
         GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;
-        GPIO_InitStruct.GPIO_Pin = GPIO_Pin_7;
+        GPIO_InitStruct.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_6 | GPIO_Pin_5 | GPIO_Pin_4 |GPIO_Pin_3;
         GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
         GPIO_Init(GPIOA,&GPIO_InitStruct); 
 	
