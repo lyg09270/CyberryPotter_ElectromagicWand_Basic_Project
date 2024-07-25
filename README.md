@@ -14,6 +14,27 @@
 
 项目使用的嵌入式机器学习库来自[nnom](https://github.com/majianjia/nnom)
 
+
+
+# 环境配置
+
+#### Python环境：
+
+- 首先需要安装一个anaconda
+
+  - 创建一个python3.9环境
+  - `conda create --name py39_env python=3.9`
+  - 激活环境
+  - ``conda activate py39_env`
+  - 切换到工程目录的CNN文件夹
+  - `cd /path/to/your/directory/CyberryPotter_ElectromagicWand_Basic_Project/CNN`
+  - 安装项目依赖
+  - `pip install -r requirements.txt`
+
+  
+
+  
+
 # 如何训练
 
 1. 使用[脚本](https://github.com/lyg09270/CyberryPotter_ElectromagicWand_Basic_Project/blob/main/CNN/Serial_Read.py)收集数据
