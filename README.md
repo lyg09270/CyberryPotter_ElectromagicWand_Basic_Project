@@ -25,7 +25,7 @@
   - 创建一个python3.9环境
   - `conda create --name py39_env python=3.9`
   - 激活环境
-  - ``conda activate py39_env`
+  - `conda activate py39_env`
   - 切换到工程目录的CNN文件夹
   - `cd /path/to/your/directory/CyberryPotter_ElectromagicWand_Basic_Project/CNN`
   - 安装项目依赖
