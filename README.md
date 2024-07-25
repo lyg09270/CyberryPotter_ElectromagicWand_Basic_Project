@@ -10,13 +10,38 @@
 2. 按键控制
 3. LED状态指示灯
 4. 串口通信
-5. 在PC端使用的[数据收集](https://github.com/lyg09270/CyberryPotter_ElectromagicWand_Basic_Project/blob/main/CNN/Serial_Read.py)、[模型训练](https://github.com/lyg09270/CyberryPotter_ElectromagicWand_Basic_Project/blob/main/CNN/CNNTrainRaw.py)、[串口模型测试脚本](https://github.com/lyg09270/CyberryPotter_ElectromagicWand_Basic_Project/blob/main/CNN/CNNTestSerialRaw.py)
+5. 使用法术点亮、熄灭LED灯
+6. 在PC端使用的[数据收集](https://github.com/lyg09270/CyberryPotter_ElectromagicWand_Basic_Project/blob/main/CNN/Serial_Read.py)、[模型训练](https://github.com/lyg09270/CyberryPotter_ElectromagicWand_Basic_Project/blob/main/CNN/CNNTrainRaw.py)、[串口模型测试脚本](https://github.com/lyg09270/CyberryPotter_ElectromagicWand_Basic_Project/blob/main/CNN/CNNTestSerialRaw.py)
 
 项目使用的嵌入式机器学习库来自[nnom](https://github.com/majianjia/nnom)
 
-实验用原理图
+实验用原理图：
 
 <img src="Schematic.jpg" alt="Schematic.jpg" width="400" height="auto">
+
+##### 项目视频教程：[Bilibili](https://www.bilibili.com/video/BV13E421w7PY/)
+
+
+
+在使用过程中出现问题可以在Bilibili私信我
+
+或者联系我的邮箱：1308770968@qq.com
+
+# 硬件需求
+
+1. STM32f103c8t6最小系统板
+2. MPU6050模块
+3. 按键
+4. 5个LED灯
+5. 串口转TTL模块（e.g.CH340）
+
+##### 如果想先尝试我已经训练好的模型，按照上方的原理图连接好你的单片机，打开keil进行烧录你就可以开始使用这个项目了
+
+
+
+# 关于法术
+
+本项目可以识别12种动作（法术），你可以将法术打印成卡片来练习法术，图片存放在了[这里](https://github.com/lyg09270/CyberryPotter_ElectromagicWand_Basic_Project/tree/main/CNN/SpellsCard)
 
 # 环境配置
 
@@ -42,6 +67,8 @@
   - 编译器版本:Arm Compiler6.22
   
   - 根据你的设备选用ST-Link或其他设备作为调试器
+  
+  - 项目在打开keil是可能会需要安装一些库，请根据提示安装
   
     
 
