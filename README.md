@@ -14,7 +14,8 @@
 
 项目使用的嵌入式机器学习库来自[nnom](https://github.com/majianjia/nnom)
 
-
+实验用原理图
+<img src="Schematic.jpg" alt="Schematic.jpg" width="200" height="auto">
 
 # 环境配置
 
