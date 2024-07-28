@@ -62,7 +62,7 @@
 
   #### Keil环境配置：
   
-  - keil版本：keil5
+  - keil版本：keil5(请使用keil官网下载的最新版keil否则可能会遇到一些问题)
   
   - 编译器版本:Arm Compiler6.22
   
@@ -70,6 +70,16 @@
   
   - 项目在打开keil是可能会需要安装一些库，请根据提示安装
   
+    #### 可能存在的问题
+    
+    编译报错：C:/Users/xxx/AppData/Local/arm/packs/Keil/STM32F1xx_DFP/2.4.1/Device/StdPeriph_Driver/src/misc.c:131:11: error: no member named 'IP' in 'NVIC_Type'
+    
+    （AppData文件夹默认是隐藏的，请先设置显示隐藏文件）
+    
+    请将device库中将misc.c文件里的上述代码（131行）修改为NVIC->IPR[NVIC_InitStruct->NVIC_IRQChannel] = tmppriority
+    
+    
+    
     
 
 # 如何训练
