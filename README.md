@@ -77,10 +77,13 @@
     #### 可能存在的问题
     
     编译报错：C:/Users/xxx/AppData/Local/arm/packs/Keil/STM32F1xx_DFP/2.4.1/Device/StdPeriph_Driver/src/misc.c:131:11: error: no member named 'IP' in 'NVIC_Type'
+
+这是项目使用到的STM32F1XX_DFP2.4.1版本库存在的一个问题，这个有问题的文件安装在以下目录，默认是只读的
+C:/Users/xxx/AppData/Local/arm/packs/Keil/STM32F1xx_DFP/2.4.1/Device/StdPeriph_Driver/src/misc.c
     
-    （AppData文件夹默认是隐藏的，请先设置显示隐藏文件）
+（AppData文件夹默认是隐藏的，请先设置显示隐藏文件）
     
-    请将device库中将misc.c文件里的上述代码（131行）修改为NVIC->IPR[NVIC_InitStruct->NVIC_IRQChannel] = tmppriority
+请将device库中将misc.c文件里的上述代码（131行）修改为NVIC->IPR[NVIC_InitStruct->NVIC_IRQChannel] = tmppriority
     
     
     
