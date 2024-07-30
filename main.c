@@ -152,7 +152,6 @@ int  main(void)
 	model = nnom_model_create();
 	
 	while(1){
-		Cyberry_Potter_Status.System_Mode = SYSTEM_TRANSMIT;
 		if(Cyberry_Potter_Status.Button_Status == BUTTON_HOLD && Cyberry_Potter_Status.IMU_Status == IMU_Idle){
 			IMU_Sample_Start();	
 			printf("HOLD\n");
