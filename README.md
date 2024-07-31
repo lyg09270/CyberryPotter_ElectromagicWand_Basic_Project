@@ -6,7 +6,6 @@
 ### 关于真正的魔杖
 完整的魔杖会在完工后开源，我会努力造出我心中定义的完美的电子魔杖，敬请期待
 
-
 <img src="CNN/SpellsCard/Spell_Card.jpg" alt="Spell Card" width="200" height="auto">
 
 已经实现的功能有：
@@ -31,6 +30,10 @@
 在使用过程中出现问题可以在Bilibili私信我
 
 或者联系我的邮箱：1308770968@qq.com
+
+以下是目前正在设计中的最终魔杖的电路板，OLED部分是开发使用的模块，通过金手指与主控板链接，完成后也会开源给大家一起玩，敬请期待
+
+<img src="./Board.jpg" alt="Spell Card" width="200" height="auto">
 
 # 硬件需求
 
