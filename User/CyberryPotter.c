@@ -103,14 +103,14 @@ void TIM4_IRQHandler(void)
 				//If button status is stable for BUTTON_SHORT_LONG_THRESHOLD_MS
 				if(time_hold_count_ms >= BUTTON_SHORT_LONG_THRESHOLD_MS){
 					Cyberry_Potter_Status.Button_Status = BUTTON_HOLD_LONG;
-					printf("long ");
+					//printf("long ");
 				}
 				//If button status is stable for BUTTON_IDLE_SHORT_THRESHOLD_MS 
 				else if(time_hold_count_ms >= BUTTON_IDLE_SHORT_THRESHOLD_MS){
 					Cyberry_Potter_Status.Button_Status = BUTTON_HOLD;
-					printf("hold ");
+					//printf("hold ");
 				}
-				printf("hold:%d",time_hold_count_ms);
+				//printf("hold:%d",time_hold_count_ms);
 				time_hold_count_ms = 0;
 				time_release_count_ms = 0;
 				TIMER_FOR_BUTTON_DISABLE;

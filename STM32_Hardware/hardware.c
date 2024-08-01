@@ -87,7 +87,7 @@ void Hardware_Init()
 	NVIC_Init(&NVIC_InitStruct);
 	
 	USART_Cmd(USART1,ENABLE);
-        printf("Hello!\n");
+        //printf("Hello!\n");
 //LED init*****************************************//      
         GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;
         GPIO_InitStruct.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_6 | GPIO_Pin_5 | GPIO_Pin_4 |GPIO_Pin_3;

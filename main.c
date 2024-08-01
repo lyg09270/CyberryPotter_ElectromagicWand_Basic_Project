@@ -154,7 +154,7 @@ int  main(void)
 	while(1){
 		if(Cyberry_Potter_Status.Button_Status == BUTTON_HOLD && Cyberry_Potter_Status.IMU_Status == IMU_Idle){
 			IMU_Sample_Start();	
-			printf("HOLD\n");
+			//printf("HOLD\n");
 		}
 		else if(Cyberry_Potter_Status.Button_Status != BUTTON_IDLE){
 			Cyberry_Potter_Status.Button_Status = BUTTON_IDLE;
