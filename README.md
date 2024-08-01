@@ -80,8 +80,12 @@
   - 根据你的设备选用ST-Link或其他设备作为调试器
   
   - 项目在打开keil是可能会需要安装一些库，请根据提示安装
-需要使用的库的下载链接：
+
+### 需要使用的库的下载链接：(如果你无法使用keil正常安装以下包，可以从链接中下载安装）
+
 1.[CMSIS6.0.0](https://www.keil.arm.com/packs/cmsis-arm/versions/)请选择6.0.0版本下载安装
+2.[CMSIS compiler 2.1.0](https://www.keil.arm.com/packs/cmsis-compiler-arm/versions/)
+3.[Stm32F1xx_DFP 2.4.1](https://www.keil.arm.com/packs/stm32f1xx_dfp-keil/versions/)
   
     #### 可能存在的问题
     
