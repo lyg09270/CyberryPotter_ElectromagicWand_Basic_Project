@@ -81,9 +81,9 @@
   
   - 项目在打开keil是可能会需要安装一些库，请根据提示安装
 
-### 需要使用的库的下载链接：(如果你无法使用keil正常安装以下包，可以从链接中下载安装）
+### 需要使用的库的下载链接：(如果你无法使用keil正常安装以下包，可以从链接中下载安装）请选择下方指定的版本下载
 
-1.[CMSIS6.0.0](https://www.keil.arm.com/packs/cmsis-arm/versions/)请选择6.0.0版本下载安装
+1.[CMSIS6.0.0](https://www.keil.arm.com/packs/cmsis-arm/versions/)
 
 2.[CMSIS compiler 2.1.0](https://www.keil.arm.com/packs/cmsis-compiler-arm/versions/)
 
