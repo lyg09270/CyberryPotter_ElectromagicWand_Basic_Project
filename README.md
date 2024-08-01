@@ -71,6 +71,28 @@
 
   
 
+  ##### Python环境配置可能出现的问题：
+  
+  `pip install -r requirements.txt`时出现
+  
+  'C:\Users\sjf\AppData\Local\Temp\pip-install-vmn8hi4e\nnom_e898a2d1f9a04e84b72bd63c378042ad' did not run successfully. │ exit code: 128 ╰─> See above for output. note: This error originates from a subprocess, and is likely not a problem with pip.
+  
+  解决方法：
+  
+  1. 在安装依赖时使用网络代理
+  
+  2. 从[nnom](https://github.com/majianjia/nnom)链接中下载nnom的压缩包，解压得到nnom-master（从本地安装nnom）
+  
+     - 先使用 `pip install nnom-master`（nnom-master存在的位置）
+  
+     - 例如你解压到桌面并且anaconda prompt的当前位置在C:/User/xxxx(xxxx是你的当前账户)
+  
+     - 此时你需要使用 `pip install Desktop/nnom-master`
+  
+     - 随后再安装其他依赖`pip install -r requirements.txt`
+  
+       
+  
   #### Keil环境配置：
   
   - keil版本：keil5(请使用keil官网下载的最新版keil否则可能会遇到一些问题)
@@ -80,19 +102,21 @@
   - 根据你的设备选用ST-Link或其他设备作为调试器
   
   - 项目在打开keil是可能会需要安装一些库，请根据提示安装
+  
+    
 
-### 需要使用的库的下载链接：(如果你无法使用keil正常安装以下包，可以从链接中下载安装）请选择下方指定的版本下载
+#### 需要使用的库的下载链接：(如果你无法使用keil正常安装以下包，可以从链接中下载安装）请选择下方指定的版本下载并安装
 
 1.[CMSIS6.0.0](https://www.keil.arm.com/packs/cmsis-arm/versions/)
 
 2.[CMSIS compiler 2.1.0](https://www.keil.arm.com/packs/cmsis-compiler-arm/versions/)
 
 3.[Stm32F1xx_DFP2.4.1](https://www.keil.arm.com/packs/stm32f1xx_dfp-keil/versions/)
-  
+
 
 
 #### 可能存在的问题
-    
+
 编译报错：C:/Users/xxx/AppData/Local/arm/packs/Keil/STM32F1xx_DFP/2.4.1/Device/StdPeriph_Driver/src/misc.c:131:11: error: no member named 'IP' in 'NVIC_Type'
 
 这是项目使用到的STM32F1XX_DFP2.4.1版本库存在的一个问题，这个有问题的文件安装在以下目录，默认是只读的，请在这个目录下将其只读选项取消勾选
@@ -102,9 +126,6 @@ C:/Users/xxx/AppData/Local/arm/packs/Keil/STM32F1xx_DFP/2.4.1/Device/StdPeriph_D
     
 请将device库中将misc.c文件里的上述代码（131行）修改为
 NVIC->IPR[NVIC_InitStruct->NVIC_IRQChannel] = tmppriority
-    
-    
-    
     
 
 # 如何训练
