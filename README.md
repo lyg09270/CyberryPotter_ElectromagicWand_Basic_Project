@@ -84,9 +84,13 @@
 ### 需要使用的库的下载链接：(如果你无法使用keil正常安装以下包，可以从链接中下载安装）
 
 1.[CMSIS6.0.0](https://www.keil.arm.com/packs/cmsis-arm/versions/)请选择6.0.0版本下载安装
+
 2.[CMSIS compiler 2.1.0](https://www.keil.arm.com/packs/cmsis-compiler-arm/versions/)
+
 3.[Stm32F1xx_DFP2.4.1](https://www.keil.arm.com/packs/stm32f1xx_dfp-keil/versions/)
   
+
+
     #### 可能存在的问题
     
     编译报错：C:/Users/xxx/AppData/Local/arm/packs/Keil/STM32F1xx_DFP/2.4.1/Device/StdPeriph_Driver/src/misc.c:131:11: error: no member named 'IP' in 'NVIC_Type'
