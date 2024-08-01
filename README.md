@@ -80,6 +80,8 @@
   - 根据你的设备选用ST-Link或其他设备作为调试器
   
   - 项目在打开keil是可能会需要安装一些库，请根据提示安装
+需要使用的库的下载链接：
+1.[CMSIS6.0.0](https://www.keil.arm.com/packs/cmsis-arm/versions/)请选择6.0.0版本下载安装
   
     #### 可能存在的问题
     
