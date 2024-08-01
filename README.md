@@ -75,7 +75,7 @@
   
   `pip install -r requirements.txt`时出现
   
-  'C:\Users\sjf\AppData\Local\Temp\pip-install-vmn8hi4e\nnom_e898a2d1f9a04e84b72bd63c378042ad' did not run successfully. │ exit code: 128 ╰─> See above for output. note: This error originates from a subprocess, and is likely not a problem with pip.
+  'C:\Users\xxx\AppData\Local\Temp\pip-install-vmn8hi4e\nnom_e898a2d1f9a04e84b72bd63c378042ad' did not run successfully. │ exit code: 128 ╰─> See above for output. note: This error originates from a subprocess, and is likely not a problem with pip.
   
   解决方法：
   
