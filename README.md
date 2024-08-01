@@ -85,7 +85,7 @@
 
 1.[CMSIS6.0.0](https://www.keil.arm.com/packs/cmsis-arm/versions/)请选择6.0.0版本下载安装
 2.[CMSIS compiler 2.1.0](https://www.keil.arm.com/packs/cmsis-compiler-arm/versions/)
-3.[Stm32F1xx_DFP 2.4.1](https://www.keil.arm.com/packs/stm32f1xx_dfp-keil/versions/)
+3.[Stm32F1xx_DFP2.4.1](https://www.keil.arm.com/packs/stm32f1xx_dfp-keil/versions/)
   
     #### 可能存在的问题
     
