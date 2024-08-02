@@ -88,9 +88,10 @@ void TIM4_IRQHandler(void)
 			//If button status is stable for BUTTON_LONG_VERYLONG_THRESHOLD_MS
 			if(time_hold_count_ms >= BUTTON_LONG_VERYLONG_THRESHOLD_MS){
 					Cyberry_Potter_Status.Button_Status = BUTTON_HOLD_VERY_LONG;
-					//Cyberry_Potter_System_Status_Update();
+					Cyberry_Potter_System_Status_Update();
 					Cyberry_Potter_Status.Button_Status = BUTTON_IDLE;
 					time_release_count_ms = 0;
+					time_hold_count_ms = 0;
 					TIMER_FOR_BUTTON_DISABLE;
 				}
 		}
