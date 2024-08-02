@@ -1,0 +1,1 @@
+{'input_1': [5, 0], 'conv1d': [4, 0], 're_lu': [4, 0], 'conv1d_1': [4, 0], 're_lu_1': [4, 0], 'max_pooling1d': [4, 0], 'flatten': [4, 0], 'dense': [4, 0], 'dropout': [4, 0], 'softmax': [7, 0]}

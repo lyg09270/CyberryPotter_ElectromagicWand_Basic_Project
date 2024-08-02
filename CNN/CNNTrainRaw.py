@@ -12,11 +12,13 @@ import re
 motion_names = ['RightAngle', 'SharpAngle', 'Lightning', 'Triangle', 'Letter_h', 'letter_R', 'letter_W', 'letter_phi', 'Circle', 'UpAndDown', 'Horn', 'Wave', 'NoMotion']
 
 # 定义目录路径
-DEF_SAVE_TO_PATH = './TraningData_7_23/'
+#DEF_SAVE_TO_PATH = './TraningData_7_23/'
+DEF_SAVE_TO_PATH = './TraningData_8_2/'
 DEF_MODEL_NAME = 'model.h5'
 DEF_MODEL_H_NAME = 'weights.h'
 DEF_FILE_MAX = 100
-DEF_N_ROWS = 60
+#DEF_N_ROWS = 60
+DEF_N_ROWS = 150
 
 # 文件格式
 DEF_FILE_FORMAT = '.txt'
@@ -29,20 +31,17 @@ DEF_NUM_EPOCH = 200
 motion_to_label = {name: idx for idx, name in enumerate(motion_names)}
 
 def train(x_train, y_train, x_test, y_test, input_shape=(DEF_N_ROWS, 3), num_classes=len(motion_names), batch_size=DEF_BATCH_SIZE, epochs=DEF_NUM_EPOCH):
-    inputs = layers.Input(shape=input_shape)
+    inputs = layers.Input(shape=input_shape) # type: ignore
     # 卷积层1
-    x = layers.Conv1D(24, kernel_size=3, strides=1)(inputs) # type: ignore
+    x = layers.Conv1D(30, kernel_size=3, strides=3)(inputs) # type: ignore
     x = layers.ReLU()(x) # type: ignore
-    x = layers.Conv1D(12, kernel_size=3, strides=1)(x) # type: ignore
+    x = layers.Conv1D(15, kernel_size=3, strides=3)(x) # type: ignore
     x = layers.ReLU()(x)# type: ignore
-    x = layers.Conv1D(12, kernel_size=3, strides=1)(x)# type: ignore
-    x = layers.ReLU()(x)# type: ignore
-    x = layers.Conv1D(12, kernel_size=3, strides=1)(x)# type: ignore
-    x = layers.ReLU()(x)# type: ignore
-    x = layers.MaxPooling1D(pool_size=3, strides=1)(x)# type: ignore
+
+    x = layers.MaxPooling1D(pool_size=3, strides=3)(x)# type: ignore
     # 展平层
     x = layers.Flatten()(x)# type: ignore
-    x = layers.Dropout(0.5)(x)# type: ignore
+   # x = layers.Dropout(0.5)(x)# type: ignore
     # 全连接层1
     x = layers.Dense(num_classes)(x)# type: ignore
     x = layers.Dropout(0.5)(x)# type: ignore
@@ -51,8 +50,8 @@ def train(x_train, y_train, x_test, y_test, input_shape=(DEF_N_ROWS, 3), num_cla
     model = models.Model(inputs=inputs, outputs=outputs)# type: ignore
     
     # 编译模型
-    model.compile(optimizer=optimizers.Adam(),
-                  loss=losses.CategoricalCrossentropy(),
+    model.compile(optimizer=optimizers.Adam(), # type: ignore
+                  loss=losses.CategoricalCrossentropy(), # type: ignore
                   metrics=['accuracy'])# type: ignore
     
     model.summary()
@@ -113,7 +112,7 @@ print(f"Max length of sequences: {max_len}")  # 打印max_len的值
 file_list_padded = pad_sequences(file_list, maxlen=max_len, dtype='float32', padding='post', value=0)
     
 # 转换标签为one-hot编码
-labels_one_hot = utils.to_categorical(labels, num_classes=len(motion_names))
+labels_one_hot = utils.to_categorical(labels, num_classes=len(motion_names)) # type: ignore
 
 # 计算分割点前，先确保数据集被完全构建
 num_elements = len(file_list_padded)
