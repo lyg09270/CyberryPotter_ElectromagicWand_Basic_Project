@@ -1,5 +1,10 @@
 # 关于项目
 
+#### 9月7日更新：
+
+- 将nnom项目放入了CNN目录方便python环境安装
+- README中添加了清华镜像源安装环境的命令
+
 #### 8月2日更新：
 
 - 采样频率调整至100HZ
@@ -78,9 +83,10 @@
   - `cd /path/to/your/directory/CyberryPotter_ElectromagicWand_Basic_Project/CNN`
   - 安装项目依赖
   - `pip install -r requirements.txt`
-
+  - 使用清华镜像源：`pip install --index-url https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt`
   
-
+  
+  
   ##### Python环境配置可能出现的问题：
   
   `pip install -r requirements.txt`时出现
