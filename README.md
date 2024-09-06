@@ -12,13 +12,6 @@
 此项目是Cyberry Potter Electromagic wand魔杖的基础工程，这个工程并不是一个完整的魔杖，只是在魔杖开发过程中的一个片段，通过这个项目你可以用最简单易取得的硬件在Stm32上部署一个卷积神经网络动作分类模型，而不需要专门制作电路板或采购一些特别的模块。你可以在这个项目中亲自训练模型，然后将模型部署在嵌入式设备上，然后根据模型输出执行不同的功能，我认为这是一个很好的学习机会。
 
 
-
-### 完整魔杖是和此项目完全不同的
-
-完整的魔杖现已完成，请参考链接：[Cyberry_Potter_Electromagic_Wand](https://github.com/lyg09270/Cyberry_Potter_Electromagic_Wand)
-
-
-
 已经实现的功能有：
 
 1. MPU6050读写数据
@@ -43,6 +36,11 @@
 或者联系我的邮箱：1308770968@qq.com
 
 魔杖技术交流群QQ：698619917
+
+
+### 关于完整魔杖
+
+完整的魔杖现已完成，请参考链接：[Cyberry_Potter_Electromagic_Wand](https://github.com/lyg09270/Cyberry_Potter_Electromagic_Wand)
 
 
 # 硬件需求
