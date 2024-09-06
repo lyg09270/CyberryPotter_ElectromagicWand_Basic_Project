@@ -13,9 +13,11 @@
 
 
 
-### 完整魔杖
+### 完整魔杖是和此项目完全不同的
 
-现已完成请参考链接：[Cyberry_Potter_Electromagic_Wand](https://github.com/lyg09270/Cyberry_Potter_Electromagic_Wand)
+完整的魔杖现已完成，请参考链接：[Cyberry_Potter_Electromagic_Wand](https://github.com/lyg09270/Cyberry_Potter_Electromagic_Wand)
+
+
 
 已经实现的功能有：
 
