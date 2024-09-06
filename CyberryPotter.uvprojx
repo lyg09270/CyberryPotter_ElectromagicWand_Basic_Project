@@ -845,11 +845,6 @@
           <targetInfo name="Target 1" versionMatchMode="fixed"/>
         </targetInfos>
       </package>
-      <package name="CMSIS-DSP" vendor="ARM" version="1.16.0">
-        <targetInfos>
-          <targetInfo name="Target 1" versionMatchMode="fixed"/>
-        </targetInfos>
-      </package>
       <package name="CMSIS-NN" vendor="ARM" version="4.0.0">
         <targetInfos>
           <targetInfo name="Target 1" versionMatchMode="fixed"/>

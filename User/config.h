@@ -56,7 +56,8 @@
 #define IMU_ACC_TRANS_CONSTANT (8192.0)  //+-4g
 //+-500 degrees raw value to degree constant is divided by 16.384
 //+-500 to radian is divided by (73.537*180/PI) = 4213.359738
-#define IMU_GYRO_TRANS_RADIAN_CONSTANT (4213.359738) 
+//#define IMU_GYRO_TRANS_RADIAN_CONSTANT (4213.359738) 
+#define IMU_GYRO_TRANS_RADIAN_CONSTANT (8192.0)
 
 //Define CNN
 //The out put of model must bigger than this value unless it will give a unrecognized message

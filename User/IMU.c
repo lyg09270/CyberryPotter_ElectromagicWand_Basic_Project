@@ -22,7 +22,7 @@ extern Cyberry_Potter_Status_Typedef Cyberry_Potter_Status;
 
 //measured data beginning with m, d means derivative ,mdAngle is measured angular velovity in this case.
 float IMU_Data_mAcc[IMU_SEQUENCE_LENGTH_MAX][3];
-float IMU_Data_mdAngle[IMU_SEQUENCE_LENGTH_MAX][3];
+float IMU_Data_mGyro[IMU_SEQUENCE_LENGTH_MAX][3];
 int16_t IMU_bias[6] = {0,0,0,0,0,0};
 
 
@@ -59,18 +59,18 @@ void IMU_Get_Data(uint8_t i)
 	IMU_Received[AccY] = (temp[2] << 8) + temp[3] - IMU_bias[AccY];
 	IMU_Received[AccZ] = (temp[4] << 8) + temp[5] - IMU_bias[AccZ];
 	
+	IMU_Data_mAcc[i][AccX] = IMU_Received[AccX] / IMU_ACC_TRANS_CONSTANT;
+	IMU_Data_mAcc[i][AccY] = IMU_Received[AccY] / IMU_ACC_TRANS_CONSTANT;
+	IMU_Data_mAcc[i][AccZ] = IMU_Received[AccZ] / IMU_ACC_TRANS_CONSTANT;
+	
 	IIC_read(0x68,MPU6050_RA_GYRO_XOUT_H,6,temp);
 	IMU_Received[Roll] = (temp[0] << 8) + temp[1] - IMU_bias[Roll];
 	IMU_Received[Pitch] = (temp[2] << 8) + temp[3]- IMU_bias[Pitch];
 	IMU_Received[Yaw] = (temp[4] << 8) + temp[5]  - IMU_bias[Yaw];
 	
-	IMU_Data_mAcc[i][AccX] = IMU_Received[AccX] / IMU_ACC_TRANS_CONSTANT;
-	IMU_Data_mAcc[i][AccY] = IMU_Received[AccY] / IMU_ACC_TRANS_CONSTANT;
-	IMU_Data_mAcc[i][AccZ] = IMU_Received[AccZ] / IMU_ACC_TRANS_CONSTANT;
-
-	IMU_Data_mdAngle[i][Roll] = IMU_Received[Roll] / IMU_GYRO_TRANS_RADIAN_CONSTANT;
-	IMU_Data_mdAngle[i][Pitch] = IMU_Received[Pitch] / IMU_GYRO_TRANS_RADIAN_CONSTANT;
-	IMU_Data_mdAngle[i][Yaw] = IMU_Received[Yaw] / IMU_GYRO_TRANS_RADIAN_CONSTANT;
+	IMU_Data_mGyro[i][Roll] = IMU_Received[Roll] / IMU_GYRO_TRANS_RADIAN_CONSTANT;
+	IMU_Data_mGyro[i][Pitch] = IMU_Received[Pitch] / IMU_GYRO_TRANS_RADIAN_CONSTANT;
+	IMU_Data_mGyro[i][Yaw] = IMU_Received[Yaw] / IMU_GYRO_TRANS_RADIAN_CONSTANT;
 }
 
 #endif //IMU_OFFSET_TEST

@@ -5,7 +5,7 @@
 extern Cyberry_Potter_Status_Typedef Cyberry_Potter_Status;
 //extern uint16_t IMU_Data_ACC[3*IMU_SEQUENCE_LENGTH_MAX];
 //extern float IMU_Data_ACC[3*IMU_SEQUENCE_LENGTH_MAX];
-extern float IMU_Data_mAngle[IMU_SEQUENCE_LENGTH_MAX][3];
+extern float IMU_Data_mGyro[IMU_SEQUENCE_LENGTH_MAX][3];
 extern float IMU_Data_mAcc[IMU_SEQUENCE_LENGTH_MAX][3];
 int8_t model_output = -1;
 #define SCALE (pow(2,INPUT_1_OUTPUT_DEC))
@@ -36,9 +36,9 @@ void model_feed_data(void)
 	const double scale = SCALE;
 	uint16_t i = 0;
 	for(i = 0; i < IMU_SEQUENCE_LENGTH_MAX;i++){
-		nnom_input_data[i*3] = (int8_t)round(IMU_Data_mAcc[i][0] * scale);
-		nnom_input_data[i*3+1] = (int8_t)round(IMU_Data_mAcc[i][1] * scale);
-		nnom_input_data[i*3+2] = (int8_t)round(IMU_Data_mAcc[i][2] * scale);
+		nnom_input_data[i*3] = (int8_t)round(IMU_Data_mGyro[i][0] * scale);
+		nnom_input_data[i*3+1] = (int8_t)round(IMU_Data_mGyro[i][1] * scale);
+		nnom_input_data[i*3+2] = (int8_t)round(IMU_Data_mGyro[i][2] * scale);
 	}
 }
 
