@@ -35,7 +35,7 @@ void IMU_Data_Print(void){
 	for(i = 0; i < IMU_SEQUENCE_LENGTH_MAX;i++){
 	printf("%f %f %f %f %f %f\n",
 		IMU_Data_mAcc[i][AccX], IMU_Data_mAcc[i][AccY], IMU_Data_mAcc[i][AccZ],
-		IMU_Data_mdAngle[i][Roll], IMU_Data_mdAngle[i][Pitch], IMU_Data_mdAngle[i][Yaw]);
+		IMU_Data_mGyro[i][Roll], IMU_Data_mGyro[i][Pitch], IMU_Data_mGyro[i][Yaw]);
 	}
 }
 #endif //SYSTEM_MODE_DATA_COLLECT
