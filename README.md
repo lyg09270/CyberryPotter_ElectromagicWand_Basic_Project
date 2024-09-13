@@ -114,7 +114,7 @@ C:/Users/xxx/AppData/Local/arm/packs/Keil/STM32F1xx_DFP/2.4.1/Device/StdPeriph_D
 （AppData文件夹默认是隐藏的，请先设置显示隐藏文件）
     
 请将device库中将misc.c文件里的上述代码（131行）修改为
-NVIC->IPR[NVIC_InitStruct->NVIC_IRQChannel] = tmppriority
+NVIC->IPR[NVIC_InitStruct->NVIC_IRQChannel] = tmppriority;
     
 
 # 如何训练
