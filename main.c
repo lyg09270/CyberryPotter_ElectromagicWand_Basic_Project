@@ -36,9 +36,9 @@ void model_feed_data(void)
 	const double scale = SCALE;
 	uint16_t i = 0;
 	for(i = 0; i < IMU_SEQUENCE_LENGTH_MAX;i++){
-		nnom_input_data[i*3] = (int8_t)round(IMU_Data_mGyro[i][0] * scale);
-		nnom_input_data[i*3+1] = (int8_t)round(IMU_Data_mGyro[i][1] * scale);
-		nnom_input_data[i*3+2] = (int8_t)round(IMU_Data_mGyro[i][2] * scale);
+		nnom_input_data[i*3] = (int8_t)round(IMU_Data_mAcc[i][0] * scale);     //这里单片机推理时使用的应该是加速度值，训练数据时用时前三列值也就是加速度值，之前的推理数据IMU_Data_mGyro是角速度
+		nnom_input_data[i*3+1] = (int8_t)round(IMU_Data_mAcc[i][1] * scale);
+		nnom_input_data[i*3+2] = (int8_t)round(IMU_Data_mAcc[i][2] * scale);
 	}
 }
 
