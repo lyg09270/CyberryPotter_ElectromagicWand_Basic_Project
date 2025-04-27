@@ -19,6 +19,7 @@ DEF_MODEL_H_NAME = 'weights.h'
 DEF_FILE_MAX = 100
 #DEF_N_ROWS = 60
 DEF_N_ROWS = 150
+DEF_USE_COLS = (3,4,5)
 
 # 文件格式
 DEF_FILE_FORMAT = '.txt'
@@ -93,7 +94,7 @@ def load_dataset(root_dir, max_rows=None):
                     if motion_name in motion_to_label:
                         file_path = os.path.join(root_dir, filename)
                         # 使用max_rows参数限制读取的行数
-                        data = np.loadtxt(file_path, delimiter=' ', usecols=(0, 1, 2), max_rows=max_rows)
+                        data = np.loadtxt(file_path, delimiter=' ', usecols=DEF_USE_COLS, max_rows=max_rows)
                         file_list.append(data)
                         labels.append(motion_to_label[motion_name])
                     else:
@@ -149,5 +150,4 @@ model.summary()
 # 这里直接使用x_test
 x_test_sample = x_test[:100]  # 使用前100个样本作为校准数据集
 
-# 假设generate_model函数已经定义在nnom模块中
 generate_model(model, x_test_sample, format='hwc', name=DEF_MODEL_H_NAME)
